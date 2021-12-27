@@ -62,10 +62,10 @@ end
 % Filtering low-pass and high-pass using useLowPassHighPass parameter
 if useLowPassHighPass ~= 0
     if plotLowPassHighPassFreqResp ~= 0
-        EEG = pop_eegfiltnew(EEG, 'locutoff', 0.5,'hicutoff', 40, 'plotfreqz', 1);
+        EEG = pop_eegfiltnew(EEG, 'locutoff', 0.5,'hicutoff', 50, 'plotfreqz', 1);
         EEG = eeg_checkset(EEG );
     else
-        EEG = pop_eegfiltnew(EEG, 'locutoff', 0.5, 'hicutoff', 40);
+        EEG = pop_eegfiltnew(EEG, 'locutoff', 0.5, 'hicutoff', 50);
         EEG = eeg_checkset(EEG );
     end
 end
@@ -87,7 +87,7 @@ end
 
 % Automatic noise rejection using pop_rejcont
 if automaticNoiseRejection ~= 0
-    [~, V_Rejected_Sample_Range] = pop_rejcont(EEG, 'elecrange', [1:EEG.nbchan] ,'freqlimit', [0.5 40] , 'threshold', 10, 'epochlength', 0.5, 'contiguous', 4, 'addlength', 0.25, 'taper', 'hamming');
+    [~, V_Rejected_Sample_Range] = pop_rejcont(EEG, 'elecrange', [1:EEG.nbchan] ,'freqlimit', [0.5 50] , 'threshold', 10, 'epochlength', 0.5, 'contiguous', 4, 'addlength', 0.25, 'taper', 'hamming');
     EEG = pop_select(EEG, 'nopoint',V_Rejected_Sample_Range);
 end
     
